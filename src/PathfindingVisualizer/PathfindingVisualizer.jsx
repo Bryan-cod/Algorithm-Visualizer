@@ -6,7 +6,9 @@ import './PathfindingVisualizer.css';
 export default class PathfindingVisualizer extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            nodes: []
+        };
     }
 
     componentDidMount() {

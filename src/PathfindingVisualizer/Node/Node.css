@@ -1,10 +1,16 @@
-
+/* Styles for the grid container using CSS Grid */
+.grid {
+    display: grid;
+    place-items: center; /* Shortcut for align-items and justify-items */
+    width: 100%; /* Optional: sets the width to the full viewport width if needed */
+}
 
 .node {
-    width: 25px;
-    height: 25px;
-    outline: 1px solid grey;
-    display: inline-block
+    width: calc(100vw / 50); /* Adjust width based on the number of columns */
+    height: calc(100vw / 50); /* Adjust height to match the width for square cells */
+    box-sizing: border-box; /* Include padding and borders in the width and height */
+    border: 1px solid grey; /* Smaller border for better grid visibility */
+    display: flex;
 }
 
 .node-finish {

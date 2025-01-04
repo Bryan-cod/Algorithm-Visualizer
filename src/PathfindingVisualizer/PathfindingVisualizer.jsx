@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
 import bfs from './Algorithms/Bfs';
+import dfs from './Algorithms/Dfs';
 
 import './PathfindingVisualizer.css';
 
@@ -28,6 +29,24 @@ export default class PathfindingVisualizer extends Component {
         };
     }
 
+    clearGrid = (nodes) => {
+        const { startNode, finishNode } = this.state;
+        for (let row = 0; row < 25; row++) {
+            const currentRow = [];
+            for (let col = 0; col < 25; col++) {
+                currentRow.push({
+                    col,
+                    row,
+                    isStart: row === startNode.row && col === startNode.col,
+                    isFinish: row === finishNode.row && col === finishNode.col, 
+                    isVisiting: false
+                });
+            }
+            nodes.push(currentRow);
+        }
+        this.setState({nodes});
+    }
+
     componentDidMount() {
         const nodes = [];
         const width = window.innerWidth;
@@ -35,7 +54,7 @@ export default class PathfindingVisualizer extends Component {
         console.log(`(height, width) = (${height}, ${width})`);
         for (let row = 0; row < 25; row++) {
             const currentRow = [];
-            for (let col = 0; col < width; col++) {
+            for (let col = 0; col < 25; col++) {
                 currentRow.push({
                     col,
                     row,
@@ -104,9 +123,13 @@ export default class PathfindingVisualizer extends Component {
     };
 
     runAlgorithm = () => {
-        const { nodes, startNode, finishNode } = this.state;
+        const { startNode, finishNode } = this.state;
+        let nodes = [];
+        // Clear the grid before the algorithm starts
+        this.clearGrid(nodes);
         const start = nodes[startNode.row][startNode.col];
         const finish = nodes[finishNode.row][finishNode.col];
+        // Run desired algorithm
         bfs(nodes, start, finish, this.visitNodeCallback);
     };
 

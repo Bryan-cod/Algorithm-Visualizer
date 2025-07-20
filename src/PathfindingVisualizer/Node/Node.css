@@ -6,11 +6,16 @@
 }
 
 .node {
-    width: calc(100vw / 50); /* Adjust width based on the number of columns */
-    height: calc(100vw / 50); /* Adjust height to match the width for square cells */
+    width: 20px; /* Reduced from 25px for larger grid */
+    height: 20px; /* Reduced from 25px for larger grid */
+    min-width: 15px; /* Reduced minimum size */
+    min-height: 15px;
+    max-width: 30px; /* Reduced maximum size */
+    max-height: 30px;
     box-sizing: border-box; /* Include padding and borders in the width and height */
     border: 1px solid grey; /* Smaller border for better grid visibility */
     display: flex;
+    transition: background-color 0.2s ease; /* Smooth transition for visiting animation */
 }
 
 .node-finish {
@@ -23,4 +28,45 @@
 
 .node-visiting {
     background-color: yellow;
+}
+
+.node-path {
+    background-color: #0066cc; /* Blue color for path */
+    border: 2px solid #004499; /* Darker blue border */
+    animation: pathPulse 1s ease-in-out infinite alternate;
+}
+
+.node-wall {
+    background-color: #333;
+}
+
+/* Animation for path nodes */
+@keyframes pathPulse {
+    from {
+        background-color: #0066cc;
+        transform: scale(1);
+    }
+    to {
+        background-color: #0088ff;
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .node {
+        width: 20px;
+        height: 20px;
+        min-width: 15px;
+        min-height: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .node {
+        width: 18px;
+        height: 18px;
+        min-width: 12px;
+        min-height: 12px;
+    }
 }

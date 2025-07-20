@@ -1,0 +1,261 @@
+.graph-container {
+    position: relative;
+    width: 90vw;
+    min-width: 320px;
+    max-width: 1800px;
+    height: 80vh;
+    min-height: 400px;
+    max-height: 1200px;
+    margin: 32px auto 0 auto;
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: crosshair;
+    box-sizing: border-box;
+    padding-bottom: 0;
+}
+
+@media (max-width: 900px) {
+    .graph-container {
+        width: 98vw;
+        height: 60vh;
+        min-width: 0;
+        min-height: 250px;
+        max-width: 100vw;
+        max-height: 80vh;
+        margin: 16px auto 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .graph-container {
+        width: 100vw;
+        height: 50vh;
+        min-width: 0;
+        min-height: 180px;
+        max-width: 100vw;
+        max-height: 60vh;
+        margin: 8px auto 0 auto;
+    }
+}
+
+.graph-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: all;
+}
+
+.graph-edge {
+    stroke: #6c757d;
+    stroke-width: 2;
+    pointer-events: all;
+    transition: all 0.2s ease;
+}
+
+.graph-edge:hover {
+    stroke: #dc3545;
+    stroke-width: 3;
+    cursor: pointer;
+}
+
+.path-edge {
+    stroke: #007bff;
+    stroke-width: 3;
+    animation: pathPulse 1s ease-in-out infinite alternate;
+}
+
+.path-edge:hover {
+    stroke: #dc3545;
+    stroke-width: 4;
+    animation: none;
+}
+
+@keyframes pathPulse {
+    0% { stroke-width: 3; }
+    100% { stroke-width: 4; }
+}
+
+.graph-vertex {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: grab;
+    user-select: none;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.graph-vertex:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.graph-vertex:active {
+    cursor: grabbing;
+}
+
+.start-vertex {
+    background-color: #28a745;
+}
+
+.finish-vertex {
+    background-color: #dc3545;
+}
+
+.visiting-vertex {
+    background-color: #ffc107;
+    animation: visitingPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes visitingPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
+}
+
+.wall-vertex {
+    background-color: #6f42c1;
+}
+
+.path-vertex {
+    background-color: #007bff;
+    animation: pathVertexPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pathVertexPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+.add-vertex-indicator {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 123, 255, 0.3);
+    border: 2px dashed #007bff;
+    color: #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 5;
+    animation: indicatorPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes indicatorPulse {
+    0% { opacity: 0.5; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.selected-vertex {
+    background-color: #ffc107 !important;
+    border: 3px solid #ff8c00;
+    animation: selectedPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes selectedPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+    100% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+}
+
+.edge-mode-indicator {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 123, 255, 0.9);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.cancel-edge-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.cancel-edge-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.edge-toggle-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.edge-toggle-button:hover {
+    background-color: #5a6268;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.edge-toggle-button.active {
+    background-color: #007bff;
+    animation: activePulse 1s ease-in-out infinite alternate;
+}
+
+.edge-toggle-button.active:hover {
+    background-color: #0056b3;
+}
+
+@keyframes activePulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .graph-vertex {
+        width: 25px;
+        height: 25px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .graph-vertex {
+        width: 20px;
+        height: 20px;
+        font-size: 8px;
+    }
+} 

@@ -1,0 +1,22 @@
+.grid {
+    margin: 250px 0 0; /* Reduced from 350px to 250px for more height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100vw;
+    overflow-x: auto;
+}
+
+/* Make the grid responsive */
+@media (max-width: 768px) {
+    .grid {
+        margin: 200px 0 0; /* Reduced from 300px */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        margin: 150px 0 0; /* Reduced from 250px */
+    }
+} 
